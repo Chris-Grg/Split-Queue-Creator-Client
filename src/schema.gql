@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type GetAllQueue {
+  response: String!
+  actionid: String!
+  message: String!
+  output: [String!]!
+}
+
+type QueueResponse {
+  response: String!
+  actionid: String!
+  message: String!
+}
+
+type Query {
+  defaultQuery: String!
+  getAllQueues: GetAllQueue!
+}
+
+type Mutation {
+  addToQueue(input: AddOrRemoveQueueMemberInput!): QueueResponse!
+  pauseQueue(input: PauseQueueInput!): QueueResponse!
+  removeQueueMember(input: AddOrRemoveQueueMemberInput!): QueueResponse!
+}
+
+input AddOrRemoveQueueMemberInput {
+  queue: String!
+  extension: String!
+}
+
+input PauseQueueInput {
+  queue: String!
+  extension: String!
+  reason: String!
+}
