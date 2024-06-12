@@ -7,7 +7,7 @@ export class RemoveQueueMemberHandler implements ICommandHandler<RemoveQueueMemb
     constructor(
         private amiService: AmiService
     ) { }
-    async execute(command: RemoveQueueMember): Promise<any> {
+    async execute(command: RemoveQueueMember) {
         return this.amiService.removeQueueMember(command)
 
     }

@@ -7,7 +7,7 @@ export class PauseQueueCommandHandler implements ICommandHandler<PauseQueueComma
     constructor(
         private amiService: AmiService
     ) { }
-    async execute(command: PauseQueueCommand): Promise<any> {
+    async execute(command: PauseQueueCommand) {
         return await this.amiService.pauseQueueMember(command)
 
     }

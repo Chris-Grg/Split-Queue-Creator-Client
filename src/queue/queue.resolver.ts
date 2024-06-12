@@ -22,7 +22,7 @@ export class QueueResolver {
     ) { }
     @Query(() => String)
     defaultQuery() {
-        return 'Hello';
+        return 'Welcome to Dynamic Queue API for ConnectInfinity';
     }
 
     @Query(() => GetAllQueue)
