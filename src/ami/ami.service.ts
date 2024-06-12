@@ -19,7 +19,7 @@ export class AmiService {
       this.configService.getAsteriskPort(),
       this.configService.getAsteriskIp(),
       this.configService.getAsteriskUsername(),
-      this.configService.getAsteriskPassword(),
+      this.configService.getAsteriskPassword,
       true)
 
     this.ami.keepConnected()
@@ -98,7 +98,6 @@ export class AmiService {
       }, (err, response) => {
 
         if (err) {
-          console.log(`::::::::ERRR:::::::${err.actionid} `)
           resolve({
             response: err.response,
             actionid: err.actionid,
