@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  dotenv.config();
+  dotenv.config({ path: '.env.dev' });
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   await app.listen(configService.get<number>('PORT'));
