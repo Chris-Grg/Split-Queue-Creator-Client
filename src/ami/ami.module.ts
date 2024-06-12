@@ -1,11 +1,12 @@
 import { Module } from "@nestjs/common";
+import { ConfigurationModule } from "src/configuration/configuration.module";
 import { AmiService } from "./ami.service";
 
 @Module({
-  imports:[],
-  providers:[
- AmiService],
+  imports: [ConfigurationModule],
+  providers: [
+    AmiService],
   controllers: [],
-  exports:[AmiService]
+  exports: [AmiService]
 })
-export class QueueModule {}
+export class QueueModule { }

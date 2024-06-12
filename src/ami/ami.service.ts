@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigurationService } from 'src/configuration/configuration.service';
 import { QueueResponse } from 'src/queue/types/queue-response.schema';
 
 
@@ -7,27 +8,23 @@ import { QueueResponse } from 'src/queue/types/queue-response.schema';
 export class AmiService {
   private ami: any;
 
-  constructor() {
+  constructor(
+    private configService: ConfigurationService,
+  ) {
     this.ami = require('asterisk-manager')(
-      process.env.ASTERISK_PORT,
-      process.env.ASTERISK_IP,
-      process.env.ASTERISK_USERNAME,
-      process.env.ASTERISK_PASSWORD,
+      // process.env.ASTERISK_PORT,
+      // process.env.ASTERISK_IP,
+      // process.env.ASTERISK_USERNAME,
+      // process.env.ASTERISK_PASSWORD,
+      this.configService.getAsteriskPort(),
+      this.configService.getAsteriskIp(),
+      this.configService.getAsteriskUsername(),
+      this.configService.getAsteriskPassword(),
       true)
 
     this.ami.keepConnected()
 
-    this.ami.on('connect', () => {
-      console.log('Connected to Asterisk AMI');
-    });
 
-    this.ami.on('disconnect', () => {
-      console.log('Disconnected from Asterisk AMI');
-    });
-
-    this.ami.on('error', (error) => {
-      console.error('AMI Error:', error);
-    });
   }
 
 
@@ -38,10 +35,8 @@ export class AmiService {
         command: "queue show"
       }, (err: any, res: any) => {
         if (err) {
-          console.log(`:::::ERROR:::: ${err}`);
           resolve(err)
         } else {
-          console.log(res);
           resolve(res)
         }
       });
@@ -60,11 +55,9 @@ export class AmiService {
       },
         (err: any, response: any) => {
           if (err) {
-            console.log("ERROR:::::::::::", err)
             resolve(err)
           }
           else {
-            console.log("RESPONSE FROM QUEUE CREATE::::::", response)
             resolve(response)
           }
         })
@@ -83,11 +76,9 @@ export class AmiService {
         Reason: reason,
       }, (err: any, response: any) => {
         if (err) {
-          console.log(err)
           resolve(err);
         }
         else {
-          console.log(response)
           resolve(response)
 
         }
@@ -97,7 +88,7 @@ export class AmiService {
 
 
   }
-  async removeQueueMember(queueMember): Promise<any> {
+  async removeQueueMember(queueMember): Promise<QueueResponse> {
     const { queue, extension } = queueMember
     return new Promise((resolve, reject) => {
       this.ami.action({
@@ -115,7 +106,6 @@ export class AmiService {
           })
         }
         else {
-          console.log(response)
           resolve(response)
         }
 
