@@ -12,16 +12,11 @@ export class AmiService {
     private configService: ConfigurationService,
   ) {
     this.ami = require('asterisk-manager')(
-      // process.env.ASTERISK_PORT,
-      // process.env.ASTERISK_IP,
-      // process.env.ASTERISK_USERNAME,
-      // process.env.ASTERISK_PASSWORD,
       this.configService.getAsteriskPort(),
       this.configService.getAsteriskIp(),
       this.configService.getAsteriskUsername(),
-      this.configService.getAsteriskPassword,
+      this.configService.getAsteriskPassword(),
       true)
-
     this.ami.keepConnected()
 
 
@@ -35,7 +30,7 @@ export class AmiService {
         command: "queue show"
       }, (err: any, res: any) => {
         if (err) {
-          resolve(err)
+          reject(err)
         } else {
           resolve(res)
         }
@@ -55,7 +50,7 @@ export class AmiService {
       },
         (err: any, response: any) => {
           if (err) {
-            resolve(err)
+            reject(err)
           }
           else {
             resolve(response)
@@ -76,7 +71,7 @@ export class AmiService {
         Reason: reason,
       }, (err: any, response: any) => {
         if (err) {
-          resolve(err);
+          reject(err);
         }
         else {
           resolve(response)
@@ -98,11 +93,7 @@ export class AmiService {
       }, (err, response) => {
 
         if (err) {
-          resolve({
-            response: err.response,
-            actionid: err.actionid,
-            message: err.message
-          })
+          reject(err)
         }
         else {
           resolve(response)
