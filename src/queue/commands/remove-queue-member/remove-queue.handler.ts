@@ -1,3 +1,4 @@
+import { BadRequestException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { AmiService } from "src/ami/ami.service";
 import { RemoveQueueMember } from "./remove-queue.command";
@@ -8,7 +9,12 @@ export class RemoveQueueMemberHandler implements ICommandHandler<RemoveQueueMemb
         private amiService: AmiService
     ) { }
     async execute(command: RemoveQueueMember) {
-        return this.amiService.removeQueueMember(command)
+        try {
+            return await this.amiService.removeQueueMember(command)
+
+        } catch (error) {
+            throw new BadRequestException(error)
+        }
 
     }
 }

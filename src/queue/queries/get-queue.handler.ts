@@ -10,4 +10,5 @@ export class GetQueueQueryHandler implements IQueryHandler<GetQueueQuery> {
     async execute(query: GetQueueQuery) {
         return this.amiService.getAll()
     }
+
 }

@@ -1,3 +1,4 @@
+import { BadRequestException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { AmiService } from "src/ami/ami.service";
 import { PauseQueueCommand } from "./pause-queue.command";
@@ -8,7 +9,11 @@ export class PauseQueueCommandHandler implements ICommandHandler<PauseQueueComma
         private amiService: AmiService
     ) { }
     async execute(command: PauseQueueCommand) {
-        return await this.amiService.pauseQueueMember(command)
+        try {
+            return await this.amiService.pauseQueueMember(command)
+        } catch (error) {
+            throw new BadRequestException(error)
+        }
 
     }
 }

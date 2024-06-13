@@ -1,3 +1,4 @@
+import { BadRequestException } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { AmiService } from "src/ami/ami.service";
 import { CreateQueueCommand } from "./create-queue.command";
@@ -11,7 +12,11 @@ export class CreateQueueCommandHandler implements ICommandHandler<CreateQueueCom
 
     }
     async execute(command: CreateQueueCommand) {
-        return await this.amiService.createQueue(command.queue, command.extension)
+        try {
+            return await this.amiService.createQueue(command.queue, command.extension)
+        } catch (error) {
+            throw new BadRequestException(error)
+        }
 
     }
 }
