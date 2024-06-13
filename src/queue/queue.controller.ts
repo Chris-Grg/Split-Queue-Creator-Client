@@ -10,16 +10,4 @@ export class QueueController {
 
     ) {
     }
-    // @Get()
-    // async getAllQueue() {
-    //     const query = new GetQueueQuery()
-    //     return await this.queryBus.execute(query)
-    // }
-
-    // @Post("/add")
-    // async addToQueue(@Body(new ValidationPipe) addQueueMemberInput: AddOrRemoveQueueMemberInput) {
-    //     const { queue, extension } = addQueueMemberInput
-    //     const command = new CreateQueueCommand(queue, extension)
-    //     return await this.commandBus.execute(command)
-    // }
 } 
