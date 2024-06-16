@@ -1,3 +1,4 @@
+import { BadRequestException } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 import { AmiService } from "src/ami/ami.service";
 import { GetQueueQuery } from "./get-queue.query";
@@ -8,7 +9,11 @@ export class GetQueueQueryHandler implements IQueryHandler<GetQueueQuery> {
         private amiService: AmiService
     ) { }
     async execute(query: GetQueueQuery) {
-        return this.amiService.getAll()
+        try {
+            return await this.amiService.getAll()
+        } catch (error) {
+            throw new BadRequestException(error)
+        }
     }
 
 }
