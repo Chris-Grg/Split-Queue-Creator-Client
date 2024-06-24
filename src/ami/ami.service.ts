@@ -60,13 +60,13 @@ export class AmiService {
 
   }
 
-  async pauseQueueMember(pauseMemeber): Promise<QueueResponse> {
-    const { extension, queue, reason } = pauseMemeber
+  async pauseOrUnpauseQueueMember(pauseMemeber): Promise<QueueResponse> {
+    const { extension, queue, reason, pause } = pauseMemeber
     return new Promise((resolve, reject) => {
       this.ami.action({
         Action: "QueuePause",
         Interface: `PJSIP/${extension}`,
-        Paused: true,
+        Paused: pause,
         Queue: queue,
         Reason: reason,
       }, (err: any, response: any) => {

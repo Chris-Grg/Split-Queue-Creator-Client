@@ -35,4 +35,5 @@ input PauseQueueInput {
   queue: String!
   extension: String!
   reason: String!
+  pause: Boolean!
 }

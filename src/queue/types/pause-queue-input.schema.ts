@@ -1,5 +1,5 @@
-import { InputType, Field } from "@nestjs/graphql";
-import { IsNotEmpty, IsString } from 'class-validator';
+import { Field, InputType } from "@nestjs/graphql";
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class PauseQueueInput {
@@ -17,4 +17,9 @@ export class PauseQueueInput {
   @IsString()
   @IsNotEmpty()
   reason: string;
+
+  @Field()
+  @IsBoolean()
+  @IsNotEmpty()
+  pause: boolean;
 }

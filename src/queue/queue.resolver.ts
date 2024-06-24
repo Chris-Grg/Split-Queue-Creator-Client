@@ -6,7 +6,7 @@ import {
     Resolver
 } from '@nestjs/graphql';
 import { CreateQueueCommand } from './commands/create-queue/create-queue.command';
-import { PauseQueueCommand } from './commands/pause-queue/pause-queue.command';
+import { PauseQueueCommand } from './commands/pause-or-unpause-queue/pause-or-unpause-queue.command';
 import { RemoveQueueMember } from './commands/remove-queue-member/remove-queue.command';
 import { GetQueueQuery } from './queries/get-queue.query';
 import { AddOrRemoveQueueMemberInput } from './types/add-or-remove-queue-input.schema';
@@ -42,7 +42,7 @@ export class QueueResolver {
     @Mutation(() => QueueResponse)
     async pauseQueue(@Args('input') input: PauseQueueInput) {
         return await this.commandBus.execute(
-            new PauseQueueCommand(input.queue, input.extension, input.reason),
+            new PauseQueueCommand(input.queue, input.extension, input.reason, input.pause),
         );
 
     }
