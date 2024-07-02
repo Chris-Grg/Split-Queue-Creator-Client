@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { AmiService } from 'src/ami/ami.service';
-import { AddToQueueCommandCommandHandler } from './commands/create-queue/add-to-queue.handler';
+import { AddToQueueCommandCommandHandler } from './commands/add-to-queue/add-to-queue.handler';
 import { PauseQueueCommandHandler } from './commands/pause-or-unpause-queue/pause-or-unpause-queue.handler';
 import { RemoveQueueMemberHandler } from './commands/remove-queue-member/remove-queue.handler';
 import { GetQueueQueryHandler } from './queries/get-queue.handler';

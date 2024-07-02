@@ -39,7 +39,7 @@ export class AmiService {
 
   }
 
-  async createQueue(queue, extension): Promise<QueueResponse> {
+  async addToQueue(queue, extension): Promise<QueueResponse> {
 
     return new Promise((resolve, reject) => {
       this.ami.action({
