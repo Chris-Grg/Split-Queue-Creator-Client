@@ -1,12 +1,11 @@
 import { ICommand } from "@nestjs/cqrs";
 
-export class CreateQueueCommand implements ICommand
-{
+export class AddToQueueCommand implements ICommand {
     constructor(
         public readonly queue: string,
         public readonly extension: string
-    ){
-        
+    ) {
+
 
     }
 }
