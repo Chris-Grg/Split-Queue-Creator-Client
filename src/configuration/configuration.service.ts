@@ -8,6 +8,7 @@ export class ConfigurationService {
     private asteriskPassword: string;
     private asteriskPort: string;
     private port: string
+    private nodeAppIp: string;
 
 
 
@@ -17,8 +18,7 @@ export class ConfigurationService {
         this.asteriskPassword = this.configService.get<string>('ASTERISK_PASSWORD');
         this.asteriskPort = this.configService.get<string>('ASTERISK_PORT');
         this.port = this.configService.get<string>('PORT');
-
-
+        this.nodeAppIp = this.configService.get<string>('NODE_APP_IP');
     }
 
     getAsteriskIp = (): string => {
@@ -35,6 +35,9 @@ export class ConfigurationService {
     };
     getPort = (): string => {
         return this.port;
+    };
+    getNodeAppIp = (): string => {
+        return this.nodeAppIp;
     };
 
 
