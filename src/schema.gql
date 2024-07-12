@@ -21,9 +21,38 @@ type Query {
 }
 
 type Mutation {
+  createQueue(input: CreateOrRemoveQueueInput!): String!
+  deleteQueue(input: DeleteQueueInput!): String!
+  updateQueue(input: UpdateQueueInput!): String!
   addToQueue(input: AddOrRemoveQueueMemberInput!): QueueResponse!
   pauseQueue(input: PauseQueueInput!): QueueResponse!
   removeQueueMember(input: AddOrRemoveQueueMemberInput!): QueueResponse!
+}
+
+input CreateOrRemoveQueueInput {
+  queue_name: String!
+  strategy: StrategyEnum!
+  ringinuse: Boolean!
+  timeout: Float!
+  wrapuptime: Float!
+}
+
+enum StrategyEnum {
+  RINGALL
+  RR
+}
+
+input DeleteQueueInput {
+  queue_name: String!
+}
+
+input UpdateQueueInput {
+  name: String!
+  queue_name: String!
+  strategy: StrategyEnum!
+  ringinuse: Boolean!
+  timeout: Float!
+  wrapuptime: Float!
 }
 
 input AddOrRemoveQueueMemberInput {
