@@ -10,6 +10,7 @@ import { ConfigurationModule } from './configuration/configuration.module';
 import { ConfigurationService } from './configuration/configuration.service';
 import { QueueModule } from './queue/queue.module';
 import { QueueService } from './queue/queue.service';
+import { MemberModule } from './member/member.module';
 
 
 @Module({
@@ -20,7 +21,7 @@ import { QueueService } from './queue/queue.service';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql')
-    }), ConfigurationModule],
+    }), ConfigurationModule, MemberModule],
   controllers: [AppController],
   providers: [
     AppService,

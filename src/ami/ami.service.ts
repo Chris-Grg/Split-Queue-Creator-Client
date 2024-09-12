@@ -90,7 +90,7 @@ export class AmiService {
         Action: "QueueRemove",
         Queue: queue,
         Interface: `PJSIP/${extension}`
-      }, (err, response) => {
+      }, (err:any, response:any) => {
 
         if (err) {
           reject(err)
